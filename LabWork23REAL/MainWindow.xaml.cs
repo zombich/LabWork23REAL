@@ -31,10 +31,10 @@ namespace LabWork23REAL
             if (dialog.ShowDialog() == false)
                 return;
 
-            var copyPath = System.IO.Path.Combine(Environment.CurrentDirectory, "GamesLogo");
-            var filePath = System.IO.Path.Combine(copyPath, $@"{dialog.SafeFileName}");
+            var copyPath = Path.Combine(Environment.CurrentDirectory, "GamesLogo");
+            var filePath = Path.Combine(copyPath, $@"{dialog.SafeFileName}");
 
-            if (!System.IO.Path.Exists(copyPath))
+            if (!Path.Exists(copyPath))
                 Directory.CreateDirectory(copyPath);
 
             File.Copy(dialog.FileName, filePath);
@@ -61,11 +61,13 @@ namespace LabWork23REAL
                 MessageBox.Show("", "");
                 return;
             }
-            ScreenshotsLw23 screenshot = new();
 
-            screenshot.Photo = bytes;
-            screenshot.FileName = dialog.SafeFileName;
-            screenshot.GameId = gameId;
+            ScreenshotsLw23 screenshot = new()
+            {
+                Photo = bytes,
+                FileName = dialog.SafeFileName,
+                GameId = gameId
+            };
 
             await _service.AddScreenshot(screenshot);
         }
