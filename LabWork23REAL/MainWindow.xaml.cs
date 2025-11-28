@@ -18,7 +18,7 @@ namespace LabWork23REAL
             InitializeComponent();
         }
 
-        private void AddLogoButton_Click(object sender, RoutedEventArgs e)
+        private async void AddLogoButton_Click(object sender, RoutedEventArgs e)
         {
             int gameId;
             if (!int.TryParse(GameIdTextBox.Text, out gameId))
@@ -39,7 +39,7 @@ namespace LabWork23REAL
 
             File.Copy(dialog.FileName, filePath);
 
-            _service.AddGameLogo(gameId, filePath);
+            await _service.AddGameLogo(gameId, filePath);
         }
 
         private async void AddScreenshotButton_Click(object sender, RoutedEventArgs e)
