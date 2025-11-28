@@ -31,5 +31,9 @@ namespace DatabaseLibrary.Service
             _context.ScreenshotsLw23s.Add(screenshot);
             await _context.SaveChangesAsync();
         }
+
+        public async Task AddUser()
+            => throw new NotImplementedException();
+
     }
 }
