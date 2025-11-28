@@ -3,16 +3,7 @@ using DatabaseLibrary.Models;
 using DatabaseLibrary.Service;
 using Microsoft.Win32;
 using System.IO;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LabWork23REAL
 {
@@ -32,10 +23,10 @@ namespace LabWork23REAL
             int gameId;
             if (!int.TryParse(GameIdTextBox.Text, out gameId))
             {
-                MessageBox.Show("","");
+                MessageBox.Show("", "");
                 return;
-            }    
-            
+            }
+
             OpenFileDialog dialog = new();
             if (dialog.ShowDialog() == false)
                 return;
@@ -51,7 +42,7 @@ namespace LabWork23REAL
             _service.AddGameLogo(gameId, filePath);
         }
 
-        private async Task AddScreenshotButton_Click(object sender, RoutedEventArgs e)
+        private async void AddScreenshotButton_Click(object sender, RoutedEventArgs e)
         {
             int gameId;
             if (!int.TryParse(GameIdTextBox.Text, out gameId))
@@ -65,7 +56,11 @@ namespace LabWork23REAL
                 return;
 
             byte[] bytes = File.ReadAllBytes(dialog.FileName);
-
+            if (bytes.Length >> 20 >= 2)
+            {
+                MessageBox.Show("", "");
+                return;
+            }
             ScreenshotsLw23 screenshot = new();
 
             screenshot.Photo = bytes;
